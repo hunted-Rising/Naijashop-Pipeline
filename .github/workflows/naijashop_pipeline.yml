@@ -43,6 +43,22 @@ jobs:
       - name: Trigger exchange rate sync
         env:
           AIRBYTE_TOKEN: ${{ steps.airbyte_auth.outputs.token }}
-          CONNECTION_ID: ${{ secrets
+          CONNECTION_ID: ${{ secrets.AIRBYTE_EXCHANGE_RATE_CONNECTION_ID }}
+        run: |
+          curl -X POST "https://api.airbyte.com/v1jobs" \
+            -H "Authorization: Bearer ${AIRBYTE_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "{\"connectionId": \"${CONNECTION_ID}\", \"jobtype\": \"sync\"}"
+
+      - name: Trigger marketing spend sync
+        env:
+          AIRBYTE_TOKEN: ${{ steps.airbyte_auth.outputs.token }}
+          CONNECTION_ID: ${{ secrets.AIRBYTE_MARKETING_CONNECTION_ID }}
+        run: |
+          curl -X POST "https://api.airbyte.com/v1/jobs" \
+            -H "Authorization: Bearer $ {AIRBYTE_TOKEN}" \
+            -H "Content-type: application/json" \
+            -d "{\"connectionId\": \"${CONNECTION_ID}\", \"jobType\": \"sync\"}"
+            
         
     
