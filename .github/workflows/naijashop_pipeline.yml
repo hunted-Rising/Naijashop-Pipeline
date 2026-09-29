@@ -25,7 +25,7 @@ jobs:
           NEON_USER: ${{ secrets.NEON_USER }}
           NEON_PASSWORD: ${{ secrets.NEON_PASSWORD }}
         run: |
-          python seed_data.py --load-pg --dsn "dbname=${NEON_DB} user=${NEON_USER} password=${NEON_PASSWORD} host=${NEON_HOST} sslmode=require"
+          python seed.py --load-pg --dsn "dbname=${NEON_DB} user=${NEON_USER} password=${NEON_PASSWORD} host=${NEON_HOST} sslmode=require"
 
   trigger-airbyte-syncs:
     runs-on: ubuntu-latest
